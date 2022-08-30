@@ -10,4 +10,30 @@
         font-size: 30px;
         font-weight: 500;
     }
+
+    .settings-btn {
+        cursor: pointer;
+        margin-left: 6px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            color: var(--textForeground);
+        }
+    }
+
+    .game-notice {
+        .chip {
+            background-color: transparent;
+            color: var(--textForeground);
+            border-color: var(--active);
+
+            &.level-chip {
+                color: var(--background);
+                background-color: var(--active);
+            }
+        }
+    }
 }

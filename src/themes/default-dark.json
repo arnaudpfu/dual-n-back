@@ -2,20 +2,12 @@
     "background": "#323437",
     "border": "#383838",
     "active": "#2d7aff",
-    "contrast": "#ffffff",
     "warning": "#fabd07",
     "error": "#fd5263",
 
-    "textForeground": "#ffffff",
-    "textMiddleground": "#d1d0c6",
+    "textForeground": "#d1d0c6",
     "textBackground": "#646669",
 
-    "buttonBackground": "transparent",
-    "buttonHoveredBackground": "#3a3a3a",
-    "buttonDisabledText": "#616161",
+    "boardBackground": "#323437"
 
-    "alertErrorBackground": "rgb(22, 11, 11)",
-    "alertErrorText": "rgb(244, 199, 199)",
-    "alertInfoBackground": "rgb(7, 19, 24)",
-    "alertInfoText": "rgb(184, 231, 251)"
 }

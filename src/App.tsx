@@ -27,7 +27,6 @@ const App: Component = () => {
             const color = defaultDarkTheme[colorName];
             if (typeof color === 'string') {
                 const cssColorName = toCSSVariableCase(colorName);
-                console.log(cssColorName);
                 themeColors += cssColorName + ': ' + color + ';\n';
             }
         }

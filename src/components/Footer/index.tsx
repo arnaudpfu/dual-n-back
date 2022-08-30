@@ -15,9 +15,6 @@ const Footer: Component<FooterProps> = (props: FooterProps) => {
         <div class="footer">
             <div class="flex-row left-part keybindings-notice">
                 <div class="keybinding-line">
-                    <strong>Space</strong> <TbSpace size={20} /> - Start / Cancel
-                </div>
-                <div class="keybinding-line">
                     Level : <strong><RiSystemArrowDownSFill size={14}  /></strong> - Decrease and <strong><RiSystemArrowUpSFill size={14}  /></strong> - Increase
                 </div>
                 <div class="keybinding-line">
