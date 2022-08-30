@@ -1,0 +1,32 @@
+{
+  "name": "dual-n-back",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arnaudpfu/dual-n-back.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/arnaudpfu/dual-n-back/issues"
+  },
+  "homepage": "https://github.com/arnaudpfu/dual-n-back#readme",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.54.6",
+    "typescript": "^4.8.2",
+    "vite": "^3.0.9",
+    "vite-plugin-solid": "^2.3.0"
+  },
+  "dependencies": {
+    "@suid/material": "^0.5.1",
+    "solid-icons": "^1.0.1",
+    "solid-js": "^1.5.1"
+  }
+}

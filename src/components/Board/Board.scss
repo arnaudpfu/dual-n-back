@@ -1,0 +1,101 @@
+$thin-border: thin solid #555555;
+
+.board {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 80vw;
+    max-width: calc(70vh - 100px);
+    height: 80vw;
+    max-height: calc(70vh - 100px);
+
+    .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 10;
+        display: none;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            height: 1px;
+            width: 20px;
+            background-color: gray;
+        }
+
+        &::before {
+            transform: translateX(-50%);
+        }
+
+        &::after {
+            transform: translateX(-50%) rotate(90deg);
+        }
+    }
+}
+
+.game-in-progress {
+    .board {
+        max-width: 80vh;
+        max-height: 80vh;
+        .center {
+            display: block;
+        }
+    }
+}
+
+.square {
+    flex: 1 0 auto;
+    background-color: white;
+    position: relative;
+}
+
+.square:after {
+    content: "";
+    float: left;
+    display: block;
+    padding-top: 100%;
+}
+
+.inner-square {
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    background-color: #4382b0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.highlighted .inner-square {
+    opacity: 1;
+}
+
+.square-0,
+.square-1,
+.square-3,
+.square-4 {
+    border-right: $thin-border;
+    border-bottom: $thin-border;
+}
+
+.square-2,
+.square-5 {
+    border-bottom: $thin-border;
+}
+
+.square-6,
+.square-7 {
+    border-right: $thin-border;
+}
+
+.row {
+    display: flex;
+}

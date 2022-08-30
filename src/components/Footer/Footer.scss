@@ -1,0 +1,48 @@
+.footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--textBackground);
+
+    .keybindings-notice {
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        row-gap: 6px;
+
+        .keybinding-line {
+            display: flex;
+            align-items: center;
+            column-gap: 6px;
+
+            strong {
+                font-weight: 400;
+                background-color: var(--textBackground);
+                color: var(--background);
+                padding: 1px 4px;
+                border-radius: 3px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                svg{
+                    transform: scale(1.3);
+                }
+            }
+        }
+    }
+
+    .notice {
+        display: flex;
+        align-items: center;
+        column-gap: 4px;
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+
+    .theme-notice {
+        text-transform: capitalize;
+    }
+}
