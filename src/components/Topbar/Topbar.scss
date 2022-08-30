@@ -28,11 +28,11 @@
         .chip {
             background-color: transparent;
             color: var(--textForeground);
-            border-color: var(--active);
+            border-color: var(--primary);
 
             &.level-chip {
                 color: var(--background);
-                background-color: var(--active);
+                background-color: var(--primary);
             }
         }
     }

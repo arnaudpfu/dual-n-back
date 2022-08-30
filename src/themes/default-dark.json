@@ -1,9 +1,11 @@
 {
     "background": "#323437",
     "border": "#383838",
-    "active": "#2d7aff",
-    "warning": "#fabd07",
-    "error": "#fd5263",
+    "primary": "#2d7aff",
+
+    "btnSuccess": "#14b488",
+    "btnError": "#fd5263",
+    "btnPressed": "#2d7aff",
 
     "textForeground": "#d1d0c6",
     "textBackground": "#646669",

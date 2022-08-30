@@ -9,6 +9,10 @@ html {
     }
 }
 
+body {
+    background-color: var(--background);
+}
+
 .app-container {
     position: absolute;
     top: 0%;
@@ -17,6 +21,14 @@ html {
     height: 100vh;
     display: flex;
     justify-content: center;
+
+    &.playing {
+        cursor: none;
+        
+        .app {
+            justify-content: center;
+        }
+    }
 
     .app {
         height: 100%;

@@ -14,7 +14,6 @@ $thin-border: thin solid var(--textBackground);
         height: 80vw;
         max-width: calc(70vh - 100px);
         max-height: calc(70vh - 100px);
-
     }
 
     .keybindings-notice {
@@ -46,7 +45,7 @@ $thin-border: thin solid var(--textBackground);
     }
 }
 
-.game-in-progress {
+.playing {
     .board {
         max-width: 80vh;
         max-height: 80vh;

@@ -1,11 +1,10 @@
-import { BoardState } from "../valueObjects/boardState";
-import { Match } from "./match";
+import { BoardState } from '../store';
+import { Match } from './Match';
 
 export class GameHistory {
-
-    public boardStates:Array<BoardState>;
-    public playerChoices:Array<Match>;
-    public matches:Array<Match>;
+    public boardStates: BoardState[];
+    public playerChoices: Match[];
+    public matches: Match[];
 
     constructor() {
         this.boardStates = [];
@@ -13,15 +12,15 @@ export class GameHistory {
         this.matches = [];
     }
 
-    public addState(boardState:BoardState) {
+    public addState(boardState: BoardState) {
         this.boardStates.push(boardState);
     }
 
-    public addChoice(playerChoice:Match) {
+    public addChoice(playerChoice: Match) {
         this.playerChoices.push(playerChoice);
     }
 
-    public addMatch(match:Match) {
+    public addMatch(match: Match) {
         this.matches.push(match);
     }
 

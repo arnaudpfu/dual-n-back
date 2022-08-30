@@ -19,6 +19,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/howler": "^2.2.7",
     "sass": "^1.54.6",
     "typescript": "^4.8.2",
     "vite": "^3.0.9",
@@ -26,6 +27,7 @@
   },
   "dependencies": {
     "@suid/material": "^0.5.1",
+    "howler": "^2.2.3",
     "solid-icons": "^1.0.1",
     "solid-js": "^1.5.1"
   }

@@ -1,16 +1,19 @@
 import { Component, ComponentProps } from 'solid-js';
+import store from '../../store';
 
 interface BoardSquareProps extends ComponentProps<any> {
     index: number;
-    targeted: boolean;
 }
 
 const BoardSquare: Component<BoardSquareProps> = (props: BoardSquareProps) => {
-    let className = `square square-${props.index} ${props.targeted ? 'highlighted' : ''}`;
-
     return (
-        <div class={className}>
-            <div class={'inner-square'}></div>
+        <div
+            class={`square square-${props.index}`}
+            classList={{
+                highlighted: props.index === store.state.boardState.positionIndex,
+            }}
+        >
+            <div class={'inner-square'} style="color:white"></div>
         </div>
     );
 };
