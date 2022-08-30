@@ -10,6 +10,7 @@
     "textForeground": "#d1d0c6",
     "textBackground": "#646669",
 
-    "boardBackground": "#323437"
-
+    "boardBackground": "#323437",
+    "resultBackground": "rgba(0, 0, 0, 0.1)"
+    
 }

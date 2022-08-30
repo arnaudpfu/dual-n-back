@@ -26,7 +26,13 @@ export class StoreGame extends Game {
             document.body.requestFullscreen();
         }
         this.start();
-        store.set('game', this);
+        store.set(
+            produce((previous) => {
+                previous.game = this;
+                previous.results.last = null;
+                previous.boardState.currentTrials = previous.settings.trials;
+            })
+        );
     }
 
     public cancel(): void {
@@ -55,8 +61,12 @@ export class StoreGame extends Game {
     }
 
     public static onBoardStateChange = (boardState: BoardState) => {
-        console.log('set position');
-        store.set('boardState', 'positionIndex', boardState.positionIndex);
+        store.set(
+            produce((previous) => {
+                previous.boardState.positionIndex = boardState.positionIndex;
+                previous.boardState.currentTrials = boardState.currentTrials;
+            })
+        );
         store.state.speech.play(boardState.letter);
         setTimeout(() => {
             store.set('boardState', 'positionIndex', -1);
@@ -88,7 +98,9 @@ export class StoreGame extends Game {
         document.exitFullscreen();
         store.set(
             produce((previous) => {
-                previous.results.push(gameResult);
+                previous.results.all.push(gameResult);
+                previous.results.last = gameResult;
+                previous.game = null;
             })
         );
     };

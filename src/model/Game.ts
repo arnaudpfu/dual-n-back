@@ -48,10 +48,6 @@ export class Game {
         this.gameHistory.addMatch(match);
     }
 
-    get currentIteration(): number {
-        return this._currentIteration;
-    }
-
     get isGameInProgress(): boolean {
         return this._isGameInProgress;
     }
@@ -203,7 +199,7 @@ export class Game {
             return {
                 positionIndex: nPreviousBoardState.positionIndex,
                 letter: this.getRandomLetter(),
-                currentTrials: -1,
+                currentTrials: this.gameLength - this._currentIteration,
             };
 
             // previous letter
@@ -211,14 +207,14 @@ export class Game {
             return {
                 positionIndex: this.getRandomPosition(),
                 letter: nPreviousBoardState.letter,
-                currentTrials: -1,
+                currentTrials: this.gameLength - this._currentIteration,
             };
             // previous position and letter
         } else {
             return {
                 positionIndex: nPreviousBoardState.positionIndex,
                 letter: nPreviousBoardState.letter,
-                currentTrials: -1,
+                currentTrials: this.gameLength - this._currentIteration,
             };
         }
     }
@@ -236,7 +232,7 @@ export class Game {
             this.currentState = {
                 positionIndex: this.getRandomPosition(),
                 letter: this.getRandomLetter(),
-                currentTrials: -1,
+                currentTrials: this.gameLength - this._currentIteration,
             };
         }
     }

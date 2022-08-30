@@ -13,10 +13,13 @@ export interface BoardState {
 }
 
 export interface State {
-    /**
-     * Results got during the session.
-     */
-    results: GameResult[];
+    results: {
+        /**
+         * Results got during the session.
+         */
+        all: GameResult[];
+        last: GameResult | null;
+    };
     speech: Speech;
     btns: {
         audio: `${ButtonState}`;
@@ -48,7 +51,10 @@ type Store = {
 };
 
 const defaultState: State = {
-    results: [],
+    results: {
+        all: [],
+        last: null,
+    },
     game: null,
     speech: new Speech(LETTERS),
     btns: {
@@ -62,7 +68,7 @@ const defaultState: State = {
     },
     settings: {
         level: 5,
-        trials: 35,
+        trials: 3,
         intervalTime: 3000,
         restDelay: 300,
         activeFeedback: false,

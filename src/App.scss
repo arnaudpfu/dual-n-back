@@ -24,7 +24,7 @@ body {
 
     &.playing {
         cursor: none;
-        
+
         .app {
             justify-content: center;
         }
@@ -46,4 +46,12 @@ body {
     display: flex;
     align-items: center;
     column-gap: 10px;
+}
+
+.trials-notice {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 15px;
+    font-weight: 500;
 }

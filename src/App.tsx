@@ -8,6 +8,7 @@ import { createTheme } from './reactiveAPI/createTheme';
 import ListenersSetup from './components/utils/ListenersSetup';
 import store from './store';
 import UserMatchNotice from './components/utils/UserMatchNotice';
+import { StoreGame } from './store/StoreGame';
 
 const VARIABLE_CONTAINER_DEFINITION_ID = 'app-css-variable-definition';
 
@@ -29,7 +30,8 @@ const App: Component = () => {
                 <Show when={store.state.game === null}>
                     <Footer />
                 </Show>
-                <Show when={store.state.game}>
+                <Show when={store.state.game !== null}>
+                    <div class="trials-notice">{store.state.boardState.currentTrials}</div>
                     <UserMatchNotice />
                 </Show>
                 {/* <ErrorBoundary fallback={}> */}
