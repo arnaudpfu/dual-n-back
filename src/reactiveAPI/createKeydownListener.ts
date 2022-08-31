@@ -6,7 +6,6 @@ import store from '../store';
 export const createKeydownListener = () => {
     createEffect(() => {
         const handleKeydown = (e: KeyboardEvent): void => {
-            console.log(e.key);
             switch (e.key) {
                 case 'l':
                     e.preventDefault();
