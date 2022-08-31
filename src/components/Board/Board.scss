@@ -1,4 +1,44 @@
-$thin-border: thin solid var(--textBackground);
+$thin-border: thin solid var(--boardBorder);
+
+.playing {
+    $thin-border: thin solid var(--playingBoardBorder);
+    .board-container {
+        .board {
+            background-color: var(--playingBoardBackground);
+            border: var(--playingBoardBorderStyle);
+            box-shadow: var(--playingBoardShadowStyle);
+        }
+
+        .center {
+            &::before,
+            &::after {
+                background-color: var(--playingBoardBorder);
+            }
+        }
+    }
+
+    .inner-square {
+        background-color: var(--playingBoardSquareBackground);
+    }
+
+    .square-0,
+    .square-1,
+    .square-3,
+    .square-4 {
+        border-right: $thin-border;
+        border-bottom: $thin-border;
+    }
+
+    .square-2,
+    .square-5 {
+        border-bottom: $thin-border;
+    }
+
+    .square-6,
+    .square-7 {
+        border-right: $thin-border;
+    }
+}
 
 .board-container {
     position: relative;
@@ -9,11 +49,16 @@ $thin-border: thin solid var(--textBackground);
     row-gap: 40px;
 
     .board {
+        transition: all 0.3s ease;
         position: relative;
         width: 80vw;
         height: 80vw;
         max-width: calc(70vh - 100px);
         max-height: calc(70vh - 100px);
+        border-radius: 5px;
+        background-color: var(--boardBackground);
+        border: var(--boardBorderStyle);
+        box-shadow: var(--boardShadowStyle);
     }
 
     .keybindings-notice {
@@ -31,8 +76,8 @@ $thin-border: thin solid var(--textBackground);
             content: "";
             position: absolute;
             height: 1px;
-            width: 20px;
-            background-color: var(--textBackground);
+            width: 15px;
+            background-color: var(--boardBorder);
         }
 
         &::before {
@@ -54,8 +99,11 @@ $thin-border: thin solid var(--textBackground);
 
 .square {
     flex: 1 0 auto;
-    background-color: var(--boardBackground);
     position: relative;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .square:after {
@@ -68,15 +116,10 @@ $thin-border: thin solid var(--textBackground);
 .inner-square {
     opacity: 0;
     transition: all 0.5s ease-in-out;
-    background-color: #4382b0;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: var(--boardSquareBackground);
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
 }
 
 .highlighted .inner-square {

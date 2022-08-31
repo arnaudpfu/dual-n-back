@@ -1,15 +1,8 @@
+import { applyInlineStyntax, toCSSVariableCase } from './../themes/config';
 import { createEffect } from 'solid-js';
+import { completeTheme, Theme } from '../themes/config';
 
-const toCSSVariableCase = (str: string): string => {
-    return '--' + str.replaceAll('.', '-');
-};
-
-export const createTheme = (
-    styleContainerID: string,
-    theme: {
-        [className: string]: string;
-    }
-): void => {
+export const createTheme = (styleContainerID: string, theme: Theme): void => {
     createEffect(() => {
         let cssVariableDefinition = document.getElementById(styleContainerID);
 
@@ -20,9 +13,10 @@ export const createTheme = (
         }
 
         let themeColors = '';
+        const inlineTheme = applyInlineStyntax(completeTheme(theme));
 
-        for (const colorName in theme) {
-            const color = theme[colorName];
+        for (const colorName in inlineTheme) {
+            const color = inlineTheme[colorName];
             if (typeof color === 'string') {
                 const cssColorName = toCSSVariableCase(colorName);
                 themeColors += cssColorName + ': ' + color + ';\n';

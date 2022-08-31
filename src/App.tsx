@@ -1,7 +1,6 @@
-import { Component, createEffect, ErrorBoundary, Show } from 'solid-js';
+import { Component, Show } from 'solid-js';
 import Board from './components/Board';
 import Topbar from './components/Topbar';
-import * as defaultDarkTheme from './themes/default-dark.json';
 import './App.scss';
 import Footer from './components/Footer';
 import { createTheme } from './reactiveAPI/createTheme';
@@ -9,11 +8,12 @@ import ListenersSetup from './components/utils/ListenersSetup';
 import store from './store';
 import UserMatchNotice from './components/utils/UserMatchNotice';
 import { StoreGame } from './store/StoreGame';
+import { DefaultDrakTheme } from './themes/defaultDark';
 
 const VARIABLE_CONTAINER_DEFINITION_ID = 'app-css-variable-definition';
 
 const App: Component = () => {
-    createTheme(VARIABLE_CONTAINER_DEFINITION_ID, defaultDarkTheme);
+    createTheme(VARIABLE_CONTAINER_DEFINITION_ID, DefaultDrakTheme);
 
     return (
         <div
