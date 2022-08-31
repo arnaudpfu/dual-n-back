@@ -24,7 +24,7 @@ const Topbar: Component<TopbarProps> = (props: TopbarProps) => {
                 <Typography variant="h2" className="title">
                     Dual N Back
                 </Typography>
-                <div class="settings-btn">
+                {/* <div class="settings-btn">
                     <IoSettingsSharp
                         size={24}
                         onClick={() => {
@@ -49,7 +49,7 @@ const Topbar: Component<TopbarProps> = (props: TopbarProps) => {
                     >
                         list
                     </Box>
-                </Drawer>
+                </Drawer> */}
             </div>
             <div class="flex-row right-part">
                 <Stack direction="row" spacing={1}>
