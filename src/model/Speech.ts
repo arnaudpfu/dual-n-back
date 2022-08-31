@@ -2,7 +2,7 @@ import { Howl } from 'howler';
 import { Letter } from './constants';
 
 export class Speech {
-    private readonly pathToLetterSounds = '.././assets/arnaudpfu/sounds/letters/';
+    private readonly pathToLetterSounds = '.././arnaudpfu/assets/sounds/letters/';
     private sounds: Map<string, Howl>;
 
     constructor(letters: Letter[]) {
