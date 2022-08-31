@@ -68,7 +68,7 @@ const defaultState: State = {
     },
     settings: {
         level: 5,
-        trials: 3,
+        trials: 30,
         intervalTime: 3000,
         restDelay: 300,
         activeFeedback: false,

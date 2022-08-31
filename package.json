@@ -23,7 +23,8 @@
     "sass": "^1.54.6",
     "typescript": "^4.8.2",
     "vite": "^3.0.9",
-    "vite-plugin-solid": "^2.3.0"
+    "vite-plugin-solid": "^2.3.0",
+    "vite-plugin-static-copy": "^0.9.0"
   },
   "dependencies": {
     "@suid/material": "^0.5.1",
