@@ -8,7 +8,7 @@ import ListenersSetup from './components/utils/ListenersSetup';
 import store from './store';
 import UserMatchNotice from './components/utils/UserMatchNotice';
 import { StoreGame } from './store/StoreGame';
-import { DefaultDrakTheme } from './themes/defaultDark';
+import { DefaultDrakTheme } from './themes/DefaultDark';
 
 const VARIABLE_CONTAINER_DEFINITION_ID = 'app-css-variable-definition';
 
