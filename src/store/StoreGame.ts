@@ -1,5 +1,5 @@
 import { produce } from 'solid-js/store';
-import { Game } from '../model/Game';
+import { Game, ResultMatch } from '../model/Game';
 import store, { BoardState } from '.';
 import { Match } from '../model/Match';
 import { GameResult } from './GameResult';
@@ -73,12 +73,21 @@ export class StoreGame extends Game {
         }, 1000);
     };
 
-    public static onPlayerChoiceValidated = (match: Match) => {
+    public static onPlayerChoiceValidated = (match: ResultMatch) => {
         store.set(
             produce((previous) => {
                 previous.btns = {
-                    audio: match.soundMatch ? ButtonState.Success : ButtonState.Error,
-                    position: match.positionMatch ? ButtonState.Success : ButtonState.Error,
+                    audio: match.sound
+                        ? match.sound === 'success'
+                            ? ButtonState.Success
+                            : ButtonState.Error
+                        : ButtonState.None,
+
+                    position: match.position
+                        ? match.position === 'success'
+                            ? ButtonState.Success
+                            : ButtonState.Error
+                        : ButtonState.None,
                 };
             })
         );

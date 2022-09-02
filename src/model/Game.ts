@@ -1,9 +1,17 @@
-import { GameHistory } from './GameHistory';
+import { GameHistory, Matches, MatchRecap } from './GameHistory';
 import { Match } from './Match';
 import { UserInput } from './enums/userInput';
 import { GameResult } from '../store/GameResult';
 import { BoardState } from '../store';
 import { Letter, LETTERS } from './constants';
+
+/**
+ * Indicate if match failed or is a success.
+ * Empty means nothing happened.
+ */
+export type ResultMatch = {
+    [type in keyof Matches]?: keyof MatchRecap;
+};
 
 export class Game {
     private readonly randomnessPercentageTreshold: number = 35;
@@ -19,11 +27,11 @@ export class Game {
     private _isGameInProgress: boolean;
     private _playerChoice: Match | null;
     private _currentState: BoardState | null;
-    private _currentMatch: Match | null;
+    private _currentMatch: ResultMatch | null;
     private _currentIteration: number;
 
     private onStateChanged: (boardState: BoardState) => void;
-    private onPlayerChoiceValidated: (match: Match) => void;
+    private onPlayerChoiceValidated: (match: ResultMatch) => void;
     private onGameEnded: (gameResult: GameResult) => void;
 
     get currentState(): BoardState | null {
@@ -37,15 +45,17 @@ export class Game {
         this.gameHistory.addState(newState);
     }
 
-    get currentMatch(): Match | null {
+    get currentMatch(): ResultMatch | null {
         return this._currentMatch;
     }
 
-    set currentMatch(match: Match | null) {
+    set currentMatch(match: ResultMatch | null) {
         if (match === null) return;
         this._currentMatch = match;
         this.onPlayerChoiceValidated(match);
-        this.gameHistory.addMatch(match);
+
+        if (match.position) this.gameHistory.addMatch('position', match.position);
+        if (match.sound) this.gameHistory.addMatch('sound', match.sound);
     }
 
     get isGameInProgress(): boolean {
@@ -58,7 +68,7 @@ export class Game {
         intervalTime: number,
         restDelay: number,
         onStateChanged: (boardState: BoardState) => void = () => undefined,
-        onPlayerChoiceValidated: (match: Match) => void = () => undefined,
+        onPlayerChoiceValidated: (match: ResultMatch) => void = () => undefined,
         onGameEnded: (gameResult: GameResult) => void = () => undefined
     ) {
         this.n = n;
@@ -103,16 +113,19 @@ export class Game {
         if (
             !this._isGameInProgress ||
             this.gameHistory.boardStates.length < 1 ||
-            this.gameHistory.boardStates.length >= this.gameLength
+            this.gameHistory.boardStates.length > this.gameLength
         ) {
             return;
         }
 
         if (this._playerChoice == null) this._playerChoice = new Match(false, false);
 
-        if (input == UserInput.Audio && !this._playerChoice.soundMatch) this._playerChoice.soundMatch = true;
-        if (input == UserInput.Position && !this._playerChoice.positionMatch)
+        if (input === UserInput.Audio && !this._playerChoice.soundMatch) {
+            this._playerChoice.soundMatch = true;
+        }
+        if (input === UserInput.Position && !this._playerChoice.positionMatch) {
             this._playerChoice.positionMatch = true;
+        }
     }
 
     private async executeDelayed(delayMs: number, fn: () => void) {
@@ -134,38 +147,47 @@ export class Game {
         this.resetChoice();
     }
 
+    private isPositionBoardMatch(): boolean {
+        const currentIndex = this.gameHistory.boardStates.length - 1;
+        return (
+            this.gameHistory.boardStates[currentIndex].positionIndex ===
+            this.gameHistory.boardStates[currentIndex - this.n].positionIndex
+        );
+    }
+
+    private isSoundBoardMatch(): boolean {
+        const currentIndex = this.gameHistory.boardStates.length - 1;
+        return (
+            this.gameHistory.boardStates[currentIndex].letter ===
+            this.gameHistory.boardStates[currentIndex - this.n].letter
+        );
+    }
+
     private validateChoice(): void {
         if (this._playerChoice === null) return;
 
-        let audioMatch = false,
-            positionMatch = false;
+        const match: ResultMatch = {};
+        const { positionMatch: positionChoiced, soundMatch: soundChoiced } = this._playerChoice;
+
         if (this.gameHistory.boardStates.length <= this.n) {
-            positionMatch = !this._playerChoice.positionMatch;
-            audioMatch = !this._playerChoice.soundMatch;
-            this.currentMatch = new Match(positionMatch, audioMatch);
+            if (positionChoiced) match.position = 'failed';
+            if (soundChoiced) match.sound = 'failed';
         } else {
-            let currentIndex = this.gameHistory.boardStates.length - 1;
-            positionMatch =
-                this._playerChoice.positionMatch ===
-                (this.gameHistory.boardStates[currentIndex].positionIndex ===
-                    this.gameHistory.boardStates[currentIndex - this.n].positionIndex);
-            audioMatch =
-                this._playerChoice.soundMatch ===
-                (this.gameHistory.boardStates[currentIndex].letter ===
-                    this.gameHistory.boardStates[currentIndex - this.n].letter);
-            this.currentMatch = new Match(positionMatch, audioMatch);
+            const positionMatched = this.isPositionBoardMatch();
+            const soundMatched = this.isSoundBoardMatch();
+            if (positionMatched || positionChoiced) {
+                match.position = positionMatched === positionChoiced ? 'success' : 'failed';
+            }
+            if (soundMatched || soundChoiced) {
+                match.sound = soundMatched === soundChoiced ? 'success' : 'failed';
+            }
         }
+
+        this.currentMatch = match;
     }
 
     private getGameResult(): GameResult {
-        let audioMatches: number = 0;
-        let positionMatches: number = 0;
-        for (let match of this.gameHistory.matches) {
-            if (match.soundMatch) audioMatches++;
-
-            if (match.positionMatch) positionMatches++;
-        }
-        return new GameResult(this.gameLength, audioMatches, positionMatches);
+        return new GameResult(this.gameHistory.matches.sound, this.gameHistory.matches.position);
     }
 
     private resetChoice() {
