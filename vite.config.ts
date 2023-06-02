@@ -8,7 +8,7 @@ export default defineConfig({
         viteStaticCopy({
             targets: [
                 {
-                    src: './src/dual-n-back/assets/sounds',
+                    src: './src/sounds',
                     dest: 'assets',
                 },
             ],
@@ -20,5 +20,5 @@ export default defineConfig({
     build: {
         target: 'esnext',
     },
-    base: './',
+    base: 'https://dual-n-back-online.com/',
 });
