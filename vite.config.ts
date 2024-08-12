@@ -20,5 +20,5 @@ export default defineConfig({
     build: {
         target: 'esnext',
     },
-    base: 'https://dual-n-back-online.com/',
+    base: 'https://arnaudpfu.github.io/dual-n-back/',
 });
